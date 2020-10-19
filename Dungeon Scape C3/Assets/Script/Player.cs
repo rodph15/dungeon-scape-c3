@@ -25,8 +25,12 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if(Input.GetKeyDown(KeyCode.Space) && _grounded)
+
+        float move = Input.GetAxis("Horizontal");
+
+        if (Input.GetMouseButtonDown(0) && _grounded && move == 0) _animator.SetTrigger("attack");
+
+        if (Input.GetKeyDown(KeyCode.Space) && _grounded) 
         {
             _animator.SetBool("jump", true);
             _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, _jumpForce);
@@ -45,7 +49,7 @@ public class Player : MonoBehaviour
         }
         
 
-        float move = Input.GetAxis("Horizontal");
+        
 
         if (move > 0) _spriteRenderer.flipX = false;
         if (move < 0) _spriteRenderer.flipX = true;
